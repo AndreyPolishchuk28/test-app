@@ -1,0 +1,140 @@
+.add-btn{
+  background-color: #27CCC0;
+  border-color: #27CCC0;
+  margin-left: 15px;
+  padding: 0 35px;
+}
+
+.ant-col-3 {
+  width: inherit;
+}
+
+.add-btn:focus{
+  background-color: #27CCC0;
+  border-color: #27CCC0;
+}
+
+.add-btn:hover{
+  background-color: #27CCC0;
+  border-color: #27CCC0;
+}
+
+.wrapper-background{
+  background: #F9F9F9;
+  background-size: cover;
+  padding-top: 2%;
+  height: 100vh;
+}
+
+.wrapper-blocks{
+  display: flex;
+}
+
+.items{
+  background-color: #fff;
+  margin-left: 30px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  width: 40%;
+  padding-top: 20px;
+}
+
+.comments{
+  background-color: #fff;
+  margin-left: 30px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  width: 40%;
+  padding-top: 20px;
+}
+
+.row{
+  padding: 7px 20px;
+  cursor: pointer;
+}
+
+.active{
+  border-left: 3px solid red;
+}
+
+.ul{
+  padding-left: 0;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.ul li{
+  font-family: sans-serif;
+  list-style: none;
+  font-weight: bold;
+  line-height: 2;
+  font-size: 16px;
+  color: #000;
+}
+
+.quantity{
+  background-color: #27CCC0;
+  padding: 2px 8px;
+  margin-left: 10px;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.wrapper-task{
+  border-bottom: 1px solid lightgrey;
+}
+
+.scroll-items{
+  overflow-y: scroll;
+  max-height: 450px;
+}
+
+.delete-btn{
+  border: 1px solid #ff5b5b;
+  color: #ff5b5b;
+}
+
+.delete-btn:hover{
+  border: 1px solid #ff5b5b;
+  color: #fff;
+  background-color: #ff5b5b;
+}
+
+.title{
+  font-size: 30px;
+  font-family: sans-serif;
+}
+
+.photo{
+  height: 80px;
+  margin-right: 10px;
+  background-color: #27CCC0;
+}
+
+.text-comment{
+  word-wrap: break-word;
+}
+
+.wrapper-comments{
+  overflow-y: scroll;
+  max-height: 350px;
+  min-height: 308px;
+}
+
+.comments-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 94%;
+}
+
+.text-area{
+  max-height: 50px;
+  min-height: 50px;
+}
+
+.image{
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  background-color: grey;
+}
