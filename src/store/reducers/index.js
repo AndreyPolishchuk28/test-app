@@ -1,10 +1,11 @@
 import { createStore, combineReducers } from "redux";
-import {ADD_TASK, DELETE_TASK, SET_COMMENTS, SET_QUANTITY} from "../actions";
+import {ADD_TASK, DELETE_TASK, SET_COMMENTS, SET_INDEX } from "../actions";
 
 const initialState = {
     allTask: [],
     active_index: ''
 };
+
 
 const taskReducer = (state = initialState, action) =>{
     const {type, payload} = action;
@@ -22,7 +23,7 @@ const taskReducer = (state = initialState, action) =>{
                 allTask: payload
             };
 
-        case SET_QUANTITY:
+        case SET_INDEX:
             return {
                 ...state, active_index: payload.active_index
             };
@@ -38,12 +39,33 @@ const taskReducer = (state = initialState, action) =>{
     }
 };
 
+function saveToLocalStorage(state) {
+    try{
+        const serializedState = JSON.stringify(state);
+        localStorage.setItem('state', serializedState)
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+function loadFromLocalStorage() {
+    try{
+        const serializedState = localStorage.getItem('state');
+        if(serializedState === null) return undefined;
+        return JSON.parse(serializedState)
+    } catch (e) {
+        console.log(e);
+        return undefined
+    }
+}
+
+const persistedState = loadFromLocalStorage();
+
 const store = createStore(
     combineReducers({ task: taskReducer }),
-    JSON.parse(localStorage['redux']));
+    persistedState
+);
 
-store.subscribe(() =>{
-    localStorage['redux'] = JSON.stringify(store.getState())
-});
+store.subscribe(() => saveToLocalStorage(store.getState()));
 
 export default store

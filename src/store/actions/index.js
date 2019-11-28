@@ -1,6 +1,6 @@
 export const ADD_TASK = 'ADD_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
-export const SET_QUANTITY = 'SET_QUANTITY';
+export const SET_INDEX = 'SET_INDEX';
 export const SET_COMMENTS = 'SET_COMMENTS';
 
 export const setTask = task => ({
@@ -13,8 +13,8 @@ export const deleteTask = task => ({
     payload: task
 });
 
-export const getQuantity = payload => ({
-    type: SET_QUANTITY,
+export const setIndex = payload => ({
+    type: SET_INDEX,
     payload: payload
 });
 

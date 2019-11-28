@@ -3,60 +3,72 @@ import { Input, Row, Col } from "antd";
 import {connect} from "react-redux";
 import {setComments, deleteTask} from "../../store/actions";
 
-// const mapStateToProps = state => ({
-//     allTask: state.task.allTask,
-//     active_index: state.task.active_index
-// });
+const mapStateToProps = state => ({
+    allTask: state.task.allTask,
+    active_index: state.task.active_index
+});
 
-export const Comments = connect(state => state, {setComments,deleteTask})( (props) =>{
-
-    const [comment, setComment] = useState();
+export const Comments = connect( mapStateToProps, {setComments,deleteTask})((props) =>{
+    const [comment, setComment] = useState('');
     const [value, setValue] = useState('');
 
     const { TextArea } = Input;
+
     const handleKey = (event) =>{
         if (event.ctrlKey && event.keyCode === 13) {
-            let arr = props.task.allTask;
-            if (props.task.active_index !== undefined && props.task.active_index !== null){ arr[props.task.active_index].comments.push(event.target.value);
+            let arr = props.allTask;
+            if (props.active_index !== undefined && props.active_index !== null){
+                arr[props.active_index].comments.push(event.target.value);
                 props.setComments(arr);
                 setValue('');
-                setComment(props.task.allTask[props.task.active_index].comments.map((elem, index) => <Row className='row wrapper-task' key={index}>
+                setComment(props.allTask[props.active_index].comments.map((elem, index) =>
+                        <Row className='row wrapper-task' key={index}>
                             <Col span={4}>
                                 <div className='photo'></div>
                             </Col>
                             <Col span={19}>
                                 <p className='text-comment'>{elem}</p>
                             </Col>
-                </Row>
+                        </Row>
                 ))
             }
         }
     };
 
     useEffect(() =>{
-        if (props.task.active_index !== undefined && props.task.active_index !== null){
-            setComment(props.task.allTask[props.task.active_index].comments.map((elem, index) =>
-                    <Row className='row wrapper-task' key={index}>
-                        <Col span={4}>
-                            <div className='photo'></div>
-                        </Col>
-                        <Col span={17}>
-                            <p className='text-comment'>{elem}</p>
-                        </Col>
-                    </Row>
-            ))
+        if (props.active_index !== undefined){
+            props.allTask.map((elem,index) => {
+                if (props.active_index === index){
+                    setComment(elem.comments.map((el, index) =>
+                        <Row className='row wrapper-task' key={index}>
+                            <Col span={4}>
+                                <div className='photo'></div>
+                            </Col>
+                            <Col span={17}>
+                                <p className='text-comment'>{el}</p>
+                            </Col>
+                        </Row>
+                    ))
+                }
+            })
         }
-    }, [props.task.active_index]);
+    }, [props.active_index]);
 
     useEffect(() =>{
         setComment('')
     }, []);
 
+    useEffect(() =>{
+        if (props.active_index === ''){
+            setComment('')
+        }
+    }, [props.active_index]);
+
     return(
         <div className='comments-wrapper'>
             <Row className='row'>
                 <Col span={3}>
-                    <h2 className='title'>Comments #{props.task.active_index !== undefined  ? props.task.active_index +1 : null}</h2>
+                    <h2 className='title'>Comments #{props.active_index === ''  ? '' : props.active_index +1}</h2>
                 </Col>
             </Row>
             <div className='wrapper-comments'>
